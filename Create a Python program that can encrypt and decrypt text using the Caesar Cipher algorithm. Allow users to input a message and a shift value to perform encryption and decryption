@@ -1,0 +1,41 @@
+# Caesar Cipher Encryption and Decryption Program
+# Prodigy Infotech - Cyber Security Internship
+# Task 1
+
+def caesar_cipher(text, shift, mode):
+    """
+    Encrypts or decrypts text using Caesar Cipher.
+    :param text: Input message
+    :param shift: Number of positions to shift
+    :param mode: 'encrypt' or 'decrypt'
+    :return: Resulting text
+    """
+    result = ""
+
+    for char in text:
+        if char.isalpha():
+            # Determine ASCII starting point
+            start = ord('A') if char.isupper() else ord('a')
+
+            if mode == "encrypt":
+                result += chr((ord(char) - start + shift) % 26 + start)
+            elif mode == "decrypt":
+                result += chr((ord(char) - start - shift) % 26 + start)
+        else:
+            # Keep non-alphabet characters unchanged
+            result += char
+
+    return result
+
+
+# User Input
+message = input("Enter your message: ")
+shift = int(input("Enter shift value: "))
+choice = input("Type 'encrypt' or 'decrypt': ").lower()
+
+# Output Result
+if choice in ["encrypt", "decrypt"]:
+    output = caesar_cipher(message, shift, choice)
+    print(f"Result: {output}")
+else:
+    print("Invalid choice! Please enter 'encrypt' or 'decrypt'.")
